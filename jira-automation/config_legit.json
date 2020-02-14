@@ -1,0 +1,585 @@
+{
+	"_comment_main": {
+		"_title": "---------------------------------------- Main Section: ----------------------------------------",
+		"_description": "Base Jira REST API link used in all backend requests. Shows up in login dialog pop up",
+		"_json_limitations": "Only one allowed"
+	},
+	"BaseURL": "https://jira.emergn.com",
+	"_comment_step_1_by_query": {
+		"_title": "---------------------------------------- Step 1: By query ----------------------------------------",
+		"_description": "JQL Query in Step 1 for finding tickets when selected tab 'By Query' instead of 'By GitHub'",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Query1": [
+		{
+			"key": "Default query",
+			"value": "project in (PERSONAS30SP8, PERSONASSCN, BGUI) AND (sprint in closedSprints() AND sprint not in openSprints() OR sprint in openSprints() AND resolution = Fixed) AND status = Completed AND type != EPIC AND component in ('Client - Diagnostics', 'Client - Editor', 'Client - Theming', 'Client - Flavor management', 'Client - Overall Framework', 'Client - WDA', 'SE Runtime', 'SE Editor', 'SE Core - Restgui', 'SE Core - Scripting', 'Client - Scripting', 'SE Personas') ORDER BY status"
+		},
+		{
+			"key": "Custom query",
+			"value": "(see config file. remember to use single quotation marks!)"
+		},
+		{
+			"key": "Emergn query",
+			"value": "project IN (Training) AND assignee=currentUser() AND summary ~ 'blank JIRA'"
+		}
+	],
+	"_comment_step_1_by_github_link": {
+		"_title": "---------------------------------------- Step 1: By GitHub: Base URL ----------------------------------------",
+		"_description": "Base GitHub API link",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"GitHubWebLink": [
+		{
+			"key": "Default Link",
+			"url": "https://github.wdf.sap.corp/api/v3"
+		},
+		{
+			"key": "Custom Link",
+			"url": "https://api.github.com"
+		},
+		{
+			"key": "Broken Link",
+			"url": "https://nononogithubforyou.com"
+		}
+	],
+	"_comment_step_1_by_github_release": {
+		"_title": "---------------------------------------- Step 1: By GitHub: Release ----------------------------------------",
+		"_description": "SP<X> configuration to be used for single or multiple Pull Request retrieval or creation at once",
+		"_json_limitations": "Only one 'true' allowed for organizations"
+	},
+	"GitHubBulkRelease": [
+		{
+			"key": "test Release",
+			"organization": [
+				{
+					"key": "personas",
+					"use": false
+				},
+				{
+					"key": "final-assembly",
+					"use": false
+				},
+				{
+					"key": "alukass",
+					"use": true
+				}
+			],
+			"repositories": [
+				{
+					"key": "jira-github-correction",
+					"use": true,
+					"pull": [
+						{
+							"title": "bulk create PR",
+							"body": "Merge customBranch -> master",
+							"base": "master",
+							"head": "alukass:customBranch",
+							"regex": "^(fix|feature)\/((training|sapmapl)-[0-9]+)\/(master|sp06|sp07|sp09|sp10)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "jira-github-release",
+					"use": true,
+					"pull": [
+						{
+							"title": "custom bulk create PR",
+							"body": "Merge customBranch -> master",
+							"base": "master",
+							"head": "alukass:customBranch",
+							"regex": "^(fix|feature)\/((training|sapmapl)-[0-9]+)\/(master|sp06|sp07|sp09|sp10)\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "origin bulk create PR",
+							"body": "Merge originBranch -> master",
+							"base": "master",
+							"head": "alukass:originBranch",
+							"regex": "^(fix|feature)\/((training|sapmapl)-[0-9]+)\/(master|sp06|sp07|sp09|sp10)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-personas",
+					"use": false,
+					"pull": [
+						{
+							"title": "SP10->FA",
+							"body": "Merge SP10 -> final assembly",
+							"base": "fa/rel-SP10",
+							"head": "personas:SP10",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp10|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se",
+					"use": false,
+					"pull": [
+						{
+							"title": "SP10->FA",
+							"body": "Merge SP10 -> final assembly",
+							"base": "fa/rel-SP10",
+							"head": "personas:SP10",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp10|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-core",
+					"use": false,
+					"pull": [
+						{
+							"title": "SP10->FA",
+							"body": "Merge SP10 -> final assembly",
+							"base": "fa/rel-SP10",
+							"head": "personas:SP10",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp10|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-control",
+					"use": false,
+					"pull": [
+						{
+							"title": "VER144->FA",
+							"body": "Merge VER144 -> final assembly",
+							"base": "fa/rel-VER144",
+							"head": "personas:VER144",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/ver144\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "VER152->FA",
+							"body": "Merge VER144 -> final assembly",
+							"base": "fa/rel-VER152",
+							"head": "personas:VER152",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/ver152\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "VER160->FA",
+							"body": "Merge VER160 -> final assembly",
+							"base": "fa/rel-VER160",
+							"head": "personas:VER160",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/ver160\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "master->FA VER165",
+							"body": "Merge master -> final assembly",
+							"base": "fa/rel-VER165",
+							"head": "personas:master",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/master\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				}
+			]
+		},
+		{
+			"key": "SP10",
+			"organization": [
+				{
+					"key": "personas",
+					"use": false
+				},
+				{
+					"key": "final-assembly",
+					"use": true
+				}
+			],
+			"repositories": [
+				{
+					"key": "client-personas",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP10->FA",
+							"body": "Merge SP10 -> final assembly",
+							"base": "fa/rel-SP10",
+							"head": "personas:SP10",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp10|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP10->FA",
+							"body": "Merge SP10 -> final assembly",
+							"base": "fa/rel-SP10",
+							"head": "personas:SP10",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp10|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-core",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP10->FA",
+							"body": "Merge SP10 -> final assembly",
+							"base": "fa/rel-SP10",
+							"head": "personas:SP10",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp10|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-control",
+					"use": true,
+					"pull": [
+						{
+							"title": "VER144->FA",
+							"body": "Merge VER144 -> final assembly",
+							"base": "fa/rel-VER144",
+							"head": "personas:VER144",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(ver144|master)\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "VER152->FA",
+							"body": "Merge VER152 -> final assembly",
+							"base": "fa/rel-VER152",
+							"head": "personas:VER152",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(ver152|master)\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "VER160->FA",
+							"body": "Merge VER160 -> final assembly",
+							"base": "fa/rel-VER160",
+							"head": "personas:VER160",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(ver160|master)\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "VER165->FA",
+							"body": "Merge VER165 -> final assembly",
+							"base": "fa/rel-VER165",
+							"head": "personas:VER165",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(ver165|master)\/([0-9A-Za-z- ]*)$"
+						},
+						{
+							"title": "VER171->FA",
+							"body": "Merge VER171 -> final assembly",
+							"base": "fa/rel-VER171",
+							"head": "personas:VER171",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(ver171|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				}
+			]
+		},
+		{
+			"key": "SP09",
+			"organization": [
+				{
+					"key": "personas",
+					"use": false
+				},
+				{
+					"key": "final-assembly",
+					"use": true
+				}
+			],
+			"repositories": [
+				{
+					"key": "client-personas",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP09->FA",
+							"body": "Merge SP09 -> final assembly",
+							"base": "fa/rel-SP09",
+							"head": "personas:SP09",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp09|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP09->FA",
+							"body": "Merge SP09 -> final assembly",
+							"base": "fa/rel-SP09",
+							"head": "personas:SP09",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp09|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-core",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP09->FA",
+							"body": "Merge SP09 -> final assembly",
+							"base": "fa/rel-SP09",
+							"head": "personas:SP09",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp09|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-control",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP09->FA",
+							"body": "Merge SP09 -> final assembly",
+							"base": "fa/rel-SP09",
+							"head": "personas:SP09",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp09|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				}
+			]
+		},
+		{
+			"key": "SP08",
+			"organization": [
+				{
+					"key": "personas",
+					"use": false
+				},
+				{
+					"key": "final-assembly",
+					"use": true
+				}
+			],
+			"repositories": [
+				{
+					"key": "client-personas",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP08->FA",
+							"body": "Merge SP08 -> final assembly",
+							"base": "fa/rel-SP08",
+							"head": "personas:SP08",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp08|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP08->FA",
+							"body": "Merge SP08 -> final assembly",
+							"base": "fa/rel-SP08",
+							"head": "personas:SP08",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp08|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-core",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP08->FA",
+							"body": "Merge SP08 -> final assembly",
+							"base": "fa/rel-SP08",
+							"head": "personas:SP08",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp08|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				},
+				{
+					"key": "client-se-control",
+					"use": true,
+					"pull": [
+						{
+							"title": "SP08->FA",
+							"body": "Merge SP08 -> final assembly",
+							"base": "fa/rel-SP08",
+							"head": "personas:SP08",
+							"regex": "^(fix|feature)\/((PERSONAS|SLIPSTREAM)-[0-9]+)\/(sp08|master)\/([0-9A-Za-z- ]*)$"
+						}
+					]
+				}
+			]
+		}
+	],
+	"_comment_step_1_version": {
+		"_title": "---------------------------------------- Step 1: Version ----------------------------------------",
+		"_description": "fixVersions that are available to be assigned for tickets automatically",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Version": [
+		{
+			"key": "SAP Note 2555555 (NEXT)"
+		},
+		{
+			"key": "SAP Note 25555556 (NEXT)"
+		},
+		{
+			"key": "Jira Automation (NEXT)"
+		},
+		{
+			"key": "Jira Automation (v1)"
+		},
+		{
+			"key": "EspoCRM"
+		},
+		{
+			"key": "SP10 Note 2844657 (NEXT)"
+		},
+		{
+			"key": "SP09 Note 2790955 (NEXT)"
+		},
+		{
+			"key": "SP08 Note 2713261 (NEXT)"
+		}
+	],
+	"_comment_step_1_columns": {
+		"_title": "---------------------------------------- Step 1: Ticket table columns ----------------------------------------",
+		"_description": "Custom columns in Step 1 that build the table automatically where 'key' = column name and 'path' = path to returned value from API '.../rest/api/2/search' in array format",
+		"_json_limitations": "Array element count unlimited - except for first 'Key' row and last 'FixVersions' row which must be first-last. If using Sprints the key 'Sprint' must always be called 'Sprint'"
+	},
+	"ColumnKeys": [
+		{
+			"key": "Key",
+			"path": "key"
+		},
+		{
+			"key": "Status",
+			"path": "fields.status.name"
+		},
+		{
+			"key": "Summary",
+			"path": "fields.summary"
+		},
+		{
+			"key": "Component",
+			"path": "fields.components.map(x=>x.name)"
+		},
+		{
+			"key": "Reporter",
+			"path": "fields.reporter.displayName"
+		},
+		{
+			"key": "Sprint",
+			"path": "fields.customfield_11242"
+		},
+		{
+			"key": "FixVersions",
+			"path": "fields.fixVersions.map(x=>x.name)"
+		}
+	],
+	"_comment_step_2_query": {
+		"_title": "---------------------------------------- Step 2: Query ----------------------------------------",
+		"_description": "JQL Query in Step 2 used for retrieving tickets with or without blue comments",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Query2": [
+		{
+			"key": "Emergn query",
+			"value": "project IN (Training) AND assignee=currentUser() AND summary ~ 'blank JIRA'"
+		},
+		{
+			"key": "Client Consumed Tickets",
+			"value": "project in (PERSONAS, PERSONASSCN, SLIPSTREAM) AND (sprint in closedSprints() AND sprint not in openSprints() OR sprint in openSprints() AND resolution = Fixed) AND status = Consumed AND type not in (Epic, Task) AND (fixVersion = EMPTY OR fixVersion = 'SP06 Note 2560835 (NEXT)' or fixVersion = 'SP07 Note 2633063 (NEXT)' or fixVersion = 'SP08 Note 2713261 (NEXT)' or fixVersion = 'SP09 Note 2790955 (NEXT)') AND component in ('Client - Diagnostics', 'Client - Editor', 'Client - Theming', 'Client - Flavor management', 'Client - Overall Framework', 'Client - WDA', 'SE Runtime', 'SE Editor', 'SE Core - Restgui', 'SE Core - Scripting', 'Client - Scripting') ORDER BY project, updated"
+		},
+		{
+			"key": "SP10 Fixes",
+			"value": "project in (SLIPSTREAM, PERSONAS) AND fixVersion = 'SP10 Note 2844657 (NEXT)'"
+		},
+		{
+			"key": "SP09 Fixes",
+			"value": "project in (SLIPSTREAM, PERSONAS) AND fixVersion = 'SP09 Note 2790955 (NEXT)'"
+		},
+		{
+			"key": "SP08 Fixes",
+			"value": "project in (SLIPSTREAM, PERSONAS) AND fixVersion = 'SP08 Note 2713261 (NEXT)'"
+		},
+		{
+			"key": "Custom query",
+			"value": "(see config file. remember to use single quotation marks!)"
+		}
+	],
+	"_comment_step_2_comments_and_step_3_projects": {
+		"_title": "---------------------------------------- Step 2: Comments and Step3: Projects ----------------------------------------",
+		"_description": "Step 2: Formats Jira comments if necessary - if 'external' value for project 'key' is not empty '' then the 'external' value will be mapped over the original, otherwise it won't change",
+		"_description2": "Step 3: List of Jira projects",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Projects": [
+		{
+			"key": "TRAINING",
+			"external": "Test tickets"
+		},
+		{
+			"key": "SAPMAPL",
+			"external": "Sap Mobile Apps"
+		},
+		{
+			"key": "PERSONAS",
+			"external": ""
+		},
+		{
+			"key": "SLIPSTREAM",
+			"external": ""
+		}
+	],
+	"_comment_step_3_ignore": {
+		"_title": "---------------------------------------- Step 3: Ignore Versions ----------------------------------------",
+		"_description": "Ignores these versions for Step 3 when retrieved from a project. Case insensitive",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"IgnoreVersions": [
+		{
+			"key": "internship"
+		},
+		{
+			"key": "abap"
+		},
+		{
+			"key": "0.1"
+		},
+		{
+			"key": "2016-P-smart-back"
+		},
+		{
+			"key": "2016-p-smart-front"
+		},
+		{
+			"key": "ABAP"
+		}
+	],
+	"_comment_step_4_boards": {
+		"_title": "---------------------------------------- Step 4: Boards ----------------------------------------",
+		"_description": "List of Jira Boards for Step 4 which are used for handling Sprint logic",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Board": [
+		{
+			"key": "scrum"
+		},
+		{
+			"key": "dummyTest"
+		},
+		{
+			"key": "2018_Combined"
+		},
+		{
+			"key": "2019_SCRUM_BOARD"
+		}
+	],
+	"_comment_step_4_status": {
+		"_title": "---------------------------------------- Step 4: Status ----------------------------------------",
+		"_description": "List of Jira ticket statuses for Step 4 which are used as filter parameters for searching issues",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Status": [
+		{
+			"key": "In Progress"
+		},
+		{
+			"key": "Open"
+		}
+	]
+}
