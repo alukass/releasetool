@@ -404,6 +404,29 @@
 			]
 		}
 	],
+	"_comment_step_1_transition": {
+		"_title": "---------------------------------------- Step 1: Transitions ----------------------------------------",
+		"_description": "Transitions or status fields sometimes put action restricitons on tickets. ID's are unique across entire JIRA server for a transition",
+		"_json_limitations": "Array element count unlimited"
+	},
+	"Transition": [
+		{
+			"key": "Set to completed",
+			"id": 871
+		},
+		{
+			"key": "Set to reopened",
+			"id": 811
+		},
+		{
+			"key": "Back to Open",
+			"id": 211
+		},
+		{
+			"key": "In Progress",
+			"id": 11
+		}
+	],
 	"_comment_step_1_version": {
 		"_title": "---------------------------------------- Step 1: Version ----------------------------------------",
 		"_description": "fixVersions that are available to be assigned for tickets automatically",
