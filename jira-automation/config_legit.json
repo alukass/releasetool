@@ -407,7 +407,7 @@
 	"_comment_step_1_transition": {
 		"_title": "---------------------------------------- Step 1: Transitions ----------------------------------------",
 		"_description": "Transitions or status fields sometimes put action restricitons on tickets. ID's are unique across entire JIRA server for a transition",
-		"_description2": "id, key, name refers to next available status/transition (id, description, name in Jira), allowed_transition refers to status (name in Jira) from which next transition is allowed",
+		"_description2": "id, key, name refers to next available status/transition (id, description, name in Jira), blocker and allowed_transition refers to status (name in Jira) from which next transition is allowed",
 		"_json_limitations": "Array element count unlimited"
 	},
 	"Transition": [
@@ -415,25 +415,29 @@
 			"id": 871,
 			"key": "Set to completed",
 			"name": "Completed",
+			"blocker": false,
 			"allowed_transition": "Reopened"
 		},
 		{
 			"id": 811,
 			"key": "Set to reopened",
 			"name": "Reopened",
+			"blocker": true,
 			"allowed_transition": "Completed"
-		},
-		{
-			"id": 211,
-			"key": "Back to Open",
-			"name": "Open",
-			"allowed_transition": "In Progress"
 		},
 		{
 			"id": 11,
 			"key": "In Progress",
 			"name": "In Progress",
+			"blocker": false,
 			"allowed_transition": "Open"
+		},
+		{
+			"id": 211,
+			"key": "Back to Open",
+			"name": "Open",
+			"blocker": true,
+			"allowed_transition": "In Progress"
 		}
 	],
 	"_comment_step_1_version": {
